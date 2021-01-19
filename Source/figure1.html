@@ -1,0 +1,94 @@
+<html>
+
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+attribute vec4 vColor;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+
+varying vec4 fColor;
+
+void main() 
+{
+    gl_Position = projectionMatrix * modelViewMatrix * vPosition;
+	fColor = vColor;
+} 
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+varying vec4 fColor;
+
+void main()
+{
+	gl_FragColor = fColor;
+}
+</script>
+
+
+
+<script type="text/javascript" src="./Common/webgl-utils.js"></script>
+<script type="text/javascript" src="./Common/InitShaders.js"></script>
+<script type="text/javascript" src="./Common/MV.js"></script>
+<script type="text/javascript" src="figure1.js"></script>
+Select which part will be changed
+<form name="formType">
+	Torso<input type="radio" id="back" name="type" value = 0 checked>
+	Arm or Head<input type="radio" id="front" name="type" value=1>
+</form>
+Select Torso
+<form name="formTorso">
+	Front<input type="radio" id="front" name="torso" value = 0 checked>
+	Back<input type="radio" id="back" name="torso" value=1>
+</form>
+Select Arm or Head
+<form name="formArm">
+	Head<input type="radio" id="Head" name="arm" value = 0 checked> 
+	1<input type="radio" id="1" name="arm" value=1>
+	2<input type="radio" id="2" name="arm" value=2>
+	3<input type="radio" id="3" name="arm" value=3>
+	4<input type="radio" id="4" name="arm" value=4>
+</form>
+Select Side
+<form name="formSide">
+	Left<input type="radio" id="Head" name="side" value = 0 checked> 
+	Right<input type="radio" id="1" name="side" value=1>
+</form>
+Select Arm Part
+<form name="formArmPart">
+	Upper<input type="radio" id="upper" name="armPart" value = 0 checked> 
+	Middle<input type="radio" id="middle" name="armPart" value=1>
+	Lower<input type="radio" id="lower" name="armPart" value=2>
+</form>
+<div id="sliderTheta">
+change angle theta <input id="slide" type="range"
+ min="-100" max="100" step="2" value="0"
+  />
+</div>
+<div id="sliderPhi">
+change angle phi <input id="slide" type="range"
+ min="-100" max="100" step="2" value="0"
+  />
+</div>
+<input type="checkbox" id="walk" name="walk" value="Walk">
+<label for="walk"> Walk </label><br>
+<div id="frameSpeed">
+frame speed <input id="slide" type="range"
+ min="-51" max="-1" step="1" value="-1"
+  />
+</div>
+<div>
+<button id = "save" type = "button">Save File</button>
+<input type="text" id="fname" name="fname"><br>
+<input type="file" id="file-selector" accept=".txt">
+</div>
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>
